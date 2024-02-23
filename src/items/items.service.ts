@@ -1,46 +1,40 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Item } from './items.model';
-import { v4 as generateId } from 'uuid';
+import { InjectRepository } from '@nestjs/typeorm';
+import { FindOneOptions, Repository } from 'typeorm';
+import { Item } from './entities/item.entity';
 import { CreateItemDto } from './dto/create-item.dto';
 import { updateItemDto } from './dto/update-item.dto';
-import { GetItemsFilterDto } from './dto/get-items.dto';
+
 @Injectable()
 export class ItemsService {
-  private items: Item[] = [];
-  getAllItems(): Item[] {
-    return this.items;
+  constructor(
+    @InjectRepository(Item)
+    private readonly itemRepository: Repository<Item>,
+  ) {}
+  async findAllItems(): Promise<Item[]> {
+    return this.itemRepository.find();
   }
 
-  getItemsWithFilters(filterDto: GetItemsFilterDto): Item[] {
-    const { price, quantity } = filterDto;
-    let items;
-    if (price) {
-      items = this.items.filter((task) => task.price === price);
+  async updateItem(id: string, updateItemDto: updateItemDto): Promise<Item> {
+    const item = await this.itemRepository.preload({
+      id: id,
+      ...updateItemDto,
+    });
+
+    if (!item) {
+      throw new Error(`Item with ID ${id} not found.`);
     }
 
-    if (quantity) {
-      console.log('YESS');
-
-      items = this.items.filter((task) => {
-        return task.price === price;
-      });
-    }
-    return items;
+    return this.itemRepository.save(item);
   }
 
-  createItem(CreateItemDto: CreateItemDto): Item {
-    const { quantity, price } = CreateItemDto;
-    const item: Item = {
-      id: generateId(),
-      price,
-      quantity,
-    };
-    this.items.push(item);
-    return item;
+  async createItem(CreateItemDto: CreateItemDto): Promise<Item> {
+    const newItem = this.itemRepository.create(CreateItemDto);
+    return this.itemRepository.save(newItem);
   }
 
-  getItemById(id: string): Item {
-    const task = this.items.find((task) => task.id === id);
+  getItemById(id: FindOneOptions): Promise<Item> {
+    const task = this.itemRepository.findOne(id);
 
     if (task) {
       return task;
@@ -49,20 +43,10 @@ export class ItemsService {
     }
   }
 
-  deleteItemById(id: string): Item {
-    const taskIndex = this.items.findIndex((task) => task.id === id);
-    if (taskIndex === -1) {
-      throw new NotFoundException();
+  async deleteItem(id: string): Promise<void> {
+    const result = await this.itemRepository.delete(id);
+    if (result.affected === 0) {
+      throw new Error(`Item with ID ${id} not found.`);
     }
-    const task = this.items[taskIndex];
-    this.items.splice(taskIndex, 1);
-    return task;
-  }
-
-  updateItemById(id: string, updateItemstatusDto: updateItemDto): Item {
-    const { quantity, price } = updateItemstatusDto;
-    const taskToUpdateIndex = this.items.findIndex((item) => item.id === id);
-    this.items[taskToUpdateIndex].quantity = quantity;
-    return this.items[taskToUpdateIndex];
   }
 }
