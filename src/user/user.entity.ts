@@ -3,16 +3,14 @@ import {
   Column,
   PrimaryGeneratedColumn,
   JoinColumn,
-  ManyToOne,
-  ManyToMany,
   OneToMany,
 } from 'typeorm';
 import { Invoice } from '../invoice/invoice.entity';
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column({ type: 'string' })
   name: string;
