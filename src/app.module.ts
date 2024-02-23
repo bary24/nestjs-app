@@ -6,6 +6,7 @@ import { UserModule } from './user/user.module';
 import { Item } from './items/entities/item.entity';
 import { User } from './user/user.entity';
 import { Invoice } from './invoice/invoice.entity';
+import { AuthenticationModule } from './authentication/authentication.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { Invoice } from './invoice/invoice.entity';
       entities: [Item, User, Invoice],
       synchronize: true, // Set to false in production
     }),
+    AuthenticationModule,
   ],
 })
 export class AppModule {}
