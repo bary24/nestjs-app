@@ -12,13 +12,16 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'string' })
+  // Use 'varchar' instead of 'string'
+  @Column({ type: 'varchar' })
   name: string;
 
-  @Column({ type: 'string' })
+  // Use 'varchar' instead of 'string'
+  @Column({ type: 'varchar' })
   username: string;
 
-  @Column({ type: 'string' })
+  // Use 'varchar' instead of 'string'
+  @Column({ type: 'varchar' })
   password: string;
 
   @OneToMany(() => Invoice, (invoice) => invoice.user)

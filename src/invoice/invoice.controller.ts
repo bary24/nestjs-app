@@ -16,7 +16,7 @@ import { DeleteResult, UpdateResult } from 'typeorm';
 import { CreatInvoiceDTO } from './dtos/createInvoice.dto';
 import { IUpdateInvoiceDTO } from './dtos/updateInvoice.dto';
 
-@Controller('invoice')
+@Controller('invoices')
 export class InvoiceController {
   constructor(private readonly invoiceService: InvoiceService) {}
 

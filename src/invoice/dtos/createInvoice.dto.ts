@@ -1,9 +1,9 @@
 import { Item } from '../../items/items.model';
-import { IsArray, IsNumber } from 'class-validator';
+import { IsArray, IsString } from 'class-validator';
 
 export class CreatInvoiceDTO {
   @IsArray()
   items: Item[];
-  @IsNumber()
+  @IsString()
   user: string;
 }
