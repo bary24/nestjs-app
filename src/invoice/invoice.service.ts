@@ -14,22 +14,27 @@ export class InvoiceService {
   async getInvoices(): Promise<Invoice[]> {
     return await this.invoiceRepository.find({ order: { id: 'DESC' } });
   }
-  getInvoice(id: number): Promise<Invoice> {
+  getInvoice(id: string): Promise<Invoice> {
     return this.invoiceRepository.findOne({
       where: { id },
       relations: ['items', 'user'],
     });
   }
 
-  async createInvoice(invoice): Promise<Invoice[]> {
-    return this.invoiceRepository.create(invoice);
+  async createInvoice(invoice: CreatInvoiceDTO): Promise<Invoice> {
+    const { items, user } = invoice;
+    const invoiceToCreate = {
+      items: items.map((item) => ({ id: item.id })),
+      user: { id: user },
+    };
+    return this.invoiceRepository.save(invoiceToCreate);
   }
 
-  async updateInvoice(id: number, invoice): Promise<UpdateResult> {
+  async updateInvoice(id: string, invoice): Promise<UpdateResult> {
     return await this.invoiceRepository.update(id, invoice);
   }
 
-  async deleteInvoice(id: number): Promise<DeleteResult> {
+  async deleteInvoice(id: string): Promise<DeleteResult> {
     return await this.invoiceRepository.delete(id);
   }
 }

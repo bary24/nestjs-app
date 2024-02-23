@@ -28,7 +28,7 @@ export class InvoiceController {
 
   @Get('/:id')
   @HttpCode(HttpStatus.OK)
-  getInvoice(@Param('id', ParseIntPipe) id: number): Promise<Invoice> {
+  getInvoice(@Param('id') id: string): Promise<Invoice> {
     return this.invoiceService.getInvoice(id);
   }
 
@@ -41,7 +41,7 @@ export class InvoiceController {
   @Patch('/:id')
   @HttpCode(HttpStatus.OK)
   updateInvoice(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('id', ParseIntPipe) id: string,
     @Body() invoice: IUpdateInvoiceDTO,
   ): Promise<UpdateResult> {
     return this.invoiceService.updateInvoice(id, invoice);
@@ -49,7 +49,7 @@ export class InvoiceController {
 
   @Delete('/:id')
   @HttpCode(HttpStatus.OK)
-  deleteInvoice(@Param('id', ParseIntPipe) id: number): Promise<DeleteResult> {
+  deleteInvoice(@Param('id', ParseIntPipe) id: string): Promise<DeleteResult> {
     return this.invoiceService.deleteInvoice(id);
   }
 }

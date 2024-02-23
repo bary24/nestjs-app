@@ -11,8 +11,8 @@ import { User } from '../user/user.entity';
 
 @Entity()
 export class Invoice {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @ManyToMany(() => Item)
   @JoinColumn()
