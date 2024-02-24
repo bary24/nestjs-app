@@ -11,7 +11,7 @@ export class AuthenticationController {
     return await this.authenticationService.login(data);
   }
 
-  @Post('register')
+  @Post('signup')
   @HttpCode(HttpStatus.CREATED)
   async register(
     @Body() data: { username: string; password: string; name: string },

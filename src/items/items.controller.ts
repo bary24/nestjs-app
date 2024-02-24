@@ -38,22 +38,22 @@ export class ItemsController {
     };
   }
   @Post()
-  createTask(@Body() CreateTaskDto: CreateItemDto): Promise<Item> {
+  createItem(@Body() CreateTaskDto: CreateItemDto): Promise<Item> {
     return this.ItemsService.createItem(CreateTaskDto);
   }
 
   @Get(':id')
-  getTaskById(@Param('id') id: FindOneOptions): Promise<Item> {
+  getItemById(@Param('id') id: FindOneOptions): Promise<Item> {
     return this.ItemsService.getItemById(id);
   }
 
   @Delete(':id')
-  deleteTaskById(@Param('id') id: string): Promise<void> {
+  deleteItemById(@Param('id') id: string): Promise<void> {
     return this.ItemsService.deleteItem(id);
   }
 
   @Put(':id')
-  updateTaskById(
+  updateItemById(
     @Param('id') id: string,
     @Body() updateItemDto: updateItemDto,
   ): Promise<Item> {

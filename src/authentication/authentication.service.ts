@@ -32,17 +32,12 @@ export class AuthenticationService {
     };
   }
 
-  async register(data): Promise<IToken> {
+  async register(data): Promise<User> {
     const hashedPassword: string = await bcrypt.hash(data.password, 10);
     const user: User = await this.userService.createUser({
       ...data,
       password: hashedPassword,
     });
-    return {
-      token: await this.jwtService.signAsync({
-        id: user.id,
-        username: user.username,
-      }),
-    };
+    return user;
   }
 }
