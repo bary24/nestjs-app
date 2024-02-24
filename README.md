@@ -34,21 +34,41 @@ This Sales Management System is designed to facilitate the sales process by allo
    ```
 
 2. Navigate to the project directory:
-   cd sales-management-system
+
+```bash
+  cd sales-management-system
+```
 
 3. install dependencies
-   npm install
+
+```bash
+  npm install
+```
 
 4. Run database migrations to set up your schema:
-   npm run typeorm migration:run
+
+```bash
+  npm run typeorm migration:run
+```
 
 5. Run the application in development mode :
-   npm run start:dev
 
-   ### API USAGE
+   ```bash
+   npm run start:dev
+   ```
+
+```
+
+### API USAGE
 
 Manage Items: POST /items, GET /items, PUT /items/:id, DELETE /items/:id
 Manage Users: POST /users, GET /users, PUT /users/:id, DELETE /users/:id
 Manage Invoices: POST /invoices, GET /invoices, PUT /invoices/:id, DELETE /invoices/:id
 User Invoices: GET /users/:userId/invoices
 Update Invoice Status: PUT /invoices/:id/status
+
+```
+
+```
+
+```
