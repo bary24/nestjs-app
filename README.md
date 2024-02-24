@@ -77,9 +77,9 @@ Below are the available API endpoints for managing items, users, invoices, and t
 ### Manage Users
 
 - **Signup*
-  - `POST /authentication/signup`
+`POST /authentication/signup`
 
--**Signin*
+- **Signin*
 `POST /authentication/signin`
 - **Retrieve All Users**
   - `GET /users`
