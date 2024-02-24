@@ -1,73 +1,54 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Sales Management System
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This Sales Management System is designed to facilitate the sales process by allowing the management of items, invoices, and users. The system enables the creation of invoices for customer purchases, associating multiple items with each invoice, including quantity and total unit price, and tracking the status of each invoice.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Functional Requirements
 
-## Description
+- **Manage Items, Invoices, and Users**: APIs to create, update, and delete items, invoices, and users.
+- **User Invoices**: Retrieve invoices for a specific user, with each invoice detailing multiple items, quantities, and prices.
+- **Invoice Status**: Each invoice can have a status of 'Placed', 'Delivered', or 'Cancelled'.
+- **Data Validation**: Ensure data integrity through validation during the creation or updating of users, items, and invoices.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Technical Requirements
 
-## Installation
+- **Framework**: The application is built using NestJS, leveraging its robust architecture for scalable server-side applications.
+- **Database**: Utilizes MySQL for data storage, ensuring reliable management of user, item, and invoice records.
+- **Migrations**: Leverage TypeORM migrations to manage database schema changes, specifically for adding status to the invoice table.
+- **Interceptors & Exception Handling**: (Optional) Implement interceptors to transform API responses, adding pagination details, and use global exception filters to standardize error responses.
 
-```bash
-$ yarn install
-```
+## Getting Started
 
-## Running the app
+### Prerequisites
 
-```bash
-# development
-$ yarn run start
+- Node.js
+- NestJS CLI
+- MySQL Database
 
-# watch mode
-$ yarn run start:dev
+### Setup
 
-# production mode
-$ yarn run start:prod
-```
+1. Clone the repository:
 
-## Test
+   ```bash
+   git clone https://github.com/bary24/nestjs-app
 
-```bash
-# unit tests
-$ yarn run test
+   ```
 
-# e2e tests
-$ yarn run test:e2e
+2. Navigate to the project directory:
+   cd sales-management-system
 
-# test coverage
-$ yarn run test:cov
-```
+3. install dependencies
+   npm install
 
-## Support
+4. Run database migrations to set up your schema:
+   npm run typeorm migration:run
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+5. Run the application in development mode :
+   npm run start:dev
 
-## Stay in touch
+   ### API USAGE
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+Manage Items: POST /items, GET /items, PUT /items/:id, DELETE /items/:id
+Manage Users: POST /users, GET /users, PUT /users/:id, DELETE /users/:id
+Manage Invoices: POST /invoices, GET /invoices, PUT /invoices/:id, DELETE /invoices/:id
+User Invoices: GET /users/:userId/invoices
+Update Invoice Status: PUT /invoices/:id/status
