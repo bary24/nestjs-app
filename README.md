@@ -57,18 +57,57 @@ This Sales Management System is designed to facilitate the sales process by allo
    npm run start:dev
 ```
 
-### API USAGE
+## API Endpoints
 
-Manage Items: POST /items, GET /items, PUT /items/:id, DELETE /items/:id
-Manage Users: POST /users, GET /users, PUT /users/:id, DELETE /users/:id
-Manage Invoices: POST /invoices, GET /invoices, PUT /invoices/:id, DELETE /invoices/:id
-User Invoices: GET /users/:userId/invoices
-Update Invoice Status: PUT /invoices/:id/status
+Below are the available API endpoints for managing items, users, invoices, and their statuses.
 
-```
+### Manage Items
 
-```
+- **Create an Item**
+  - `POST /items`
+- **Retrieve All Items**
+  - `GET /items`
+- **Update an Item**
+  - `PUT /items/:id`
+    - Replace `:id` with the item's unique identifier.
+- **Delete an Item**
+  - `DELETE /items/:id`
+    - Replace `:id` with the item's unique identifier.
 
-```
+### Manage Users
 
-```
+- **Create a User**
+  - `POST /users`
+- **Retrieve All Users**
+  - `GET /users`
+- **Update a User**
+  - `PUT /users/:id`
+    - Replace `:id` with the user's unique identifier.
+- **Delete a User**
+  - `DELETE /users/:id`
+    - Replace `:id` with the user's unique identifier.
+
+### Manage Invoices
+
+- **Create an Invoice**
+  - `POST /invoices`
+- **Retrieve All Invoices**
+  - `GET /invoices`
+- **Update an Invoice**
+  - `PUT /invoices/:id`
+    - Replace `:id` with the invoice's unique identifier.
+- **Delete an Invoice**
+  - `DELETE /invoices/:id`
+    - Replace `:id` with the invoice's unique identifier.
+
+### User Invoices
+
+- **Retrieve Invoices for a Specific User**
+  - `GET /users/:userId/invoices`
+    - Replace `:userId` with the user's unique identifier.
+
+### Update Invoice Status
+
+- **Update the Status of an Invoice**
+  - `PUT /invoices/:id/status`
+    - Replace `:id` with the invoice's unique identifier. Provide the new status in the request body.
