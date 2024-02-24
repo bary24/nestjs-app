@@ -17,9 +17,15 @@ export class InvoiceService {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
   ) {}
-  async getInvoices(): Promise<Invoice[]> {
-    return await this.invoiceRepository.find({ order: { id: 'DESC' } });
+  async getInvoices(page, limit): Promise<[Invoice[], number]> {
+    const [data, totalCount] = await this.invoiceRepository.findAndCount({
+      relations: ['items', 'user'], // Specify relations to be loaded
+      skip: (page - 1) * limit, // Calculate the offset
+      take: limit,
+    });
+    return [data, totalCount];
   }
+
   getInvoice(id: string): Promise<Invoice> {
     return this.invoiceRepository.findOne({
       where: { id },

@@ -5,6 +5,7 @@ import {
   JoinColumn,
   ManyToOne,
   ManyToMany,
+  JoinTable,
 } from 'typeorm';
 import { Item } from '../items/entities/item.entity';
 import { User } from '../user/user.entity';
@@ -15,7 +16,7 @@ export class Invoice {
   id: string;
 
   @ManyToMany(() => Item)
-  @JoinColumn()
+  @JoinTable()
   items: Item[];
 
   @ManyToOne(() => User, (user) => user.invoices)

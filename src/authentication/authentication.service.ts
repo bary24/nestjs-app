@@ -1,6 +1,5 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { User } from '../user/user.entity';
-import { InjectRepository } from '@nestjs/typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from '../user/user.service';
 import * as bcrypt from 'bcrypt';
@@ -12,7 +11,6 @@ export interface IToken {
 @Injectable()
 export class AuthenticationService {
   constructor(
-    @InjectRepository(User)
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
   ) {}

@@ -11,8 +11,13 @@ export class ItemsService {
     @InjectRepository(Item)
     private readonly itemRepository: Repository<Item>,
   ) {}
-  async findAllItems(): Promise<Item[]> {
-    return this.itemRepository.find();
+  async findAllItems(page, limit): Promise<[Item[], number]> {
+    const [data, totalCount] = await this.itemRepository.findAndCount({
+      skip: (page - 1) * limit, // Calculate the offset
+      take: limit,
+    });
+
+    return [data, totalCount];
   }
 
   async updateItem(id: string, updateItemDto: updateItemDto): Promise<Item> {

@@ -1,21 +1,25 @@
-import { forwardRef, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
+import { JwtModule } from '@nestjs/jwt';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthenticationController } from './authentication.controller';
 import { AuthenticationService } from './authentication.service';
 import { UserModule } from '../user/user.module';
-import { AppModule } from '../app.module';
-import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   controllers: [AuthenticationController],
   providers: [AuthenticationService],
   imports: [
     UserModule,
-    JwtModule.register({
-      global: true,
-      secret: process.env.JWT_SECRET,
-      signOptions: { expiresIn: process.env.JWT_EXPIRATION_TIME },
+    JwtModule.registerAsync({
+      imports: [ConfigModule], // Make sure ConfigModule is imported
+      inject: [ConfigService], // Inject ConfigService to use it in useFactory
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get<string>('JWT_SECRET'), // Access the JWT_SECRET from ConfigService
+        signOptions: {
+          expiresIn: configService.get<string>('JWT_EXPIRATION_TIME'), // Access the JWT_EXPIRATION_TIME from ConfigService
+        },
+      }),
     }),
-    forwardRef(() => AppModule),
   ],
 })
 export class AuthenticationModule {}

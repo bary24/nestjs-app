@@ -9,21 +9,37 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  UseGuards,
+  DefaultValuePipe,
+  Query,
 } from '@nestjs/common';
+import { JwtAuthGuard } from '../authentication/jwt-auth.guard';
 import { InvoiceService } from './invoice.service';
 import { Invoice } from './invoice.entity';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { CreatInvoiceDTO } from './dtos/createInvoice.dto';
 import { IUpdateInvoiceDTO } from './dtos/updateInvoice.dto';
-
+@UseGuards(JwtAuthGuard)
 @Controller('invoices')
 export class InvoiceController {
   constructor(private readonly invoiceService: InvoiceService) {}
 
   @Get('/')
   @HttpCode(HttpStatus.OK)
-  getInvoices() {
-    return this.invoiceService.getInvoices();
+  async getInvoices(
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
+  ) {
+    const [data, totalCount] = await this.invoiceService.getInvoices(
+      page,
+      limit,
+    );
+    return {
+      data,
+      page,
+      limit,
+      totalCount,
+    };
   }
 
   @Get('/:id')
