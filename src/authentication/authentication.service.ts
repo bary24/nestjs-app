@@ -21,7 +21,7 @@ export class AuthenticationService {
       data.password,
       user.password,
     );
-    console.log(hashedEnteredPass);
+
     if (!user || !hashedEnteredPass) {
       throw new UnauthorizedException('Invalid credentials');
     }
