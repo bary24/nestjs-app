@@ -7,12 +7,19 @@ import { Item } from './items/entities/item.entity';
 import { User } from './user/user.entity';
 import { Invoice } from './invoice/invoice.entity';
 import { AuthenticationModule } from './authentication/authentication.module';
+import { ConfigModule } from '@nestjs/config';
+import typeorm from './config/typeorm';
 
 @Module({
   imports: [
     ItemsModule,
     InvoiceModule,
     UserModule,
+    ConfigModule.forRoot({
+      isGlobal: true, // Makes the config globally available
+      load: [typeorm],
+    }),
+
     TypeOrmModule.forRoot({
       type: 'mysql', // Database type
       host: 'localhost', // Database host
@@ -22,6 +29,7 @@ import { AuthenticationModule } from './authentication/authentication.module';
       database: 'mydb', // Database name
       entities: [Item, User, Invoice],
       synchronize: true, // Set to false in production
+      migrations: ['migrations/*.ts'],
     }),
     AuthenticationModule,
   ],
