@@ -28,10 +28,10 @@ This Sales Management System is designed to facilitate the sales process by allo
 
 1. Clone the repository:
 
-   ```bash
+```bash
    git clone https://github.com/bary24/nestjs-app
 
-   ```
+```
 
 2. Navigate to the project directory:
 
@@ -53,10 +53,8 @@ This Sales Management System is designed to facilitate the sales process by allo
 
 5. Run the application in development mode :
 
-   ```bash
+```bash
    npm run start:dev
-   ```
-
 ```
 
 ### API USAGE
@@ -66,6 +64,8 @@ Manage Users: POST /users, GET /users, PUT /users/:id, DELETE /users/:id
 Manage Invoices: POST /invoices, GET /invoices, PUT /invoices/:id, DELETE /invoices/:id
 User Invoices: GET /users/:userId/invoices
 Update Invoice Status: PUT /invoices/:id/status
+
+```
 
 ```
 
