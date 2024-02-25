@@ -2,7 +2,7 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { User } from '../user/user.entity';
 import { Invoice } from '../invoice/invoice.entity';
-import { Item } from '../items/entities/item.entity';
+import { Item } from '../items/item.entity';
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
   type: 'mysql',

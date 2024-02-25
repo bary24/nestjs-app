@@ -1,7 +1,7 @@
 import { DataSource } from 'typeorm';
 import { User } from '../user/user.entity'; // Adjust path as necessary
 import { Invoice } from '../invoice/invoice.entity'; // Adjust path as necessary
-import { Item } from '../items/entities/item.entity'; // Adjust path as necessary
+import { Item } from '../items/item.entity'; // Adjust path as necessary
 
 export const AppDataSource = new DataSource({
   type: 'mysql', // Database type

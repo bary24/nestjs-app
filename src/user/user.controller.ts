@@ -12,6 +12,12 @@ export class UserController {
   getUsers(): Promise<User[]> {
     return this.UserService.getUsers();
   }
+
+  @Get(':id')
+  getUserById(@Param('id') id: string): Promise<User> {
+    return this.UserService.getUser(id);
+  }
+
   @Put(':id')
   updateUser(
     @Param('id') id: string,

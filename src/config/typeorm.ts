@@ -2,7 +2,7 @@
 import { DataSource } from 'typeorm';
 import { User } from '../user/user.entity';
 import { Invoice } from '../invoice/invoice.entity';
-import { Item } from '../items/entities/item.entity';
+import { Item } from '../items/item.entity';
 const AppDataSource = new DataSource({
   type: 'mysql',
   host: 'localhost',

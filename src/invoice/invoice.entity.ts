@@ -7,7 +7,7 @@ import {
   ManyToMany,
   JoinTable,
 } from 'typeorm';
-import { Item } from '../items/entities/item.entity';
+import { Item } from '../items/item.entity';
 import { User } from '../user/user.entity';
 
 @Entity()

@@ -1,4 +1,4 @@
-import { Item } from '../../items/items.model';
+import { Item } from '../../items/item.entity';
 import { IsArray, IsString } from 'class-validator';
 
 export class CreatInvoiceDTO {

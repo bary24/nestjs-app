@@ -12,7 +12,7 @@ import {
   ParseIntPipe,
 } from '@nestjs/common';
 import { ItemsService } from './items.service';
-import { Item } from './items.model';
+import { Item } from './item.entity';
 import { CreateItemDto } from './dto/create-item.dto';
 import { updateItemDto } from './dto/update-item.dto';
 import { FindOneOptions } from 'typeorm';
@@ -43,7 +43,7 @@ export class ItemsController {
   }
 
   @Get(':id')
-  getItemById(@Param('id') id: FindOneOptions): Promise<Item> {
+  getItemById(@Param('id') id: string): Promise<Item> {
     return this.ItemsService.getItemById(id);
   }
 

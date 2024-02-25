@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindOneOptions, Repository } from 'typeorm';
-import { Item } from './entities/item.entity';
+import { Item } from './item.entity';
 import { CreateItemDto } from './dto/create-item.dto';
 import { updateItemDto } from './dto/update-item.dto';
 
@@ -38,13 +38,13 @@ export class ItemsService {
     return this.itemRepository.save(newItem);
   }
 
-  getItemById(id: FindOneOptions): Promise<Item> {
-    const task = this.itemRepository.findOne(id);
+  async getItemById(id: string): Promise<Item> {
+    const item = await this.itemRepository.findOne({ where: { id: id } });
 
-    if (task) {
-      return task;
+    if (item) {
+      return item;
     } else {
-      throw new NotFoundException(`Task with id ${id} was not found`);
+      throw new NotFoundException(`item with id ${id} was not found`);
     }
   }
 

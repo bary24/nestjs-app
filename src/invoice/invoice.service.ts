@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { Invoice } from './invoice.entity';
 import { CreatInvoiceDTO } from './dtos/createInvoice.dto';
-import { Item } from '../items/entities/item.entity'; // Assuming you have an Item entity
+import { Item } from '../items/item.entity'; // Assuming you have an Item entity
 import { User } from '../user/user.entity'; // Assuming you have a User entity
 
 @Injectable()
