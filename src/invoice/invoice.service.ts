@@ -17,12 +17,22 @@ export class InvoiceService {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
   ) {}
-  async getInvoices(page, limit): Promise<[Invoice[], number]> {
-    const [data, totalCount] = await this.invoiceRepository.findAndCount({
-      relations: ['items', 'user'], // Specify relations to be loaded
-      skip: (page - 1) * limit, // Calculate the offset
+  async getInvoices(
+    userId: string,
+    page: number,
+    limit: number,
+  ): Promise<[Invoice[], number]> {
+    const findOptions = {
+      relations: ['items', 'user'],
+      skip: (page - 1) * limit,
       take: limit,
-    });
+    };
+
+    if (userId) {
+      findOptions['where'] = { user: { id: userId } }; // Filter by userId
+    }
+    const [data, totalCount] =
+      await this.invoiceRepository.findAndCount(findOptions);
     return [data, totalCount];
   }
 

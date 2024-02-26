@@ -12,6 +12,6 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   password: 'mypassword',
   database: 'mydb',
   entities: [User, Invoice, Item],
-  synchronize: false, // should be false in production
+  synchronize: true,
   migrations: [__dirname + '/../migrations/**/*.ts'],
 };

@@ -6,4 +6,5 @@ export class CreatInvoiceDTO {
   items: Item[];
   @IsString()
   user: string;
+  status: string;
 }

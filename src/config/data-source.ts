@@ -13,7 +13,7 @@ export const AppDataSource = new DataSource({
   entities: [User, Invoice, Item],
   synchronize: false, // should be false in production
   logging: true,
-  migrations: ['src/migration/**/*.ts'], // Adjust path as necessary
+  migrations: [__dirname + '/../migrations/**/*.ts'], // Adjust path as necessary
   subscribers: [],
 });
 

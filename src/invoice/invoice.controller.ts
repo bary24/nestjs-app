@@ -29,8 +29,10 @@ export class InvoiceController {
   async getInvoices(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
+    @Query('userId') userId: string,
   ) {
     const [data, totalCount] = await this.invoiceService.getInvoices(
+      userId,
       page,
       limit,
     );
