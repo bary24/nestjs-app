@@ -12,15 +12,12 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  // Use 'varchar' instead of 'string'
   @Column({ type: 'varchar' })
   name: string;
 
-  // Use 'varchar' instead of 'string'
   @Column({ type: 'varchar' })
   username: string;
 
-  // Use 'varchar' instead of 'string'
   @Column({ type: 'varchar' })
   password: string;
 

@@ -3,6 +3,7 @@ import { User } from '../user/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from '../user/user.service';
 import * as bcrypt from 'bcrypt';
+import { signupDto } from './dtos/signup.dto';
 
 export interface IToken {
   token: string;
@@ -16,7 +17,7 @@ export class AuthenticationService {
   ) {}
 
   async login(data): Promise<IToken | UnauthorizedException> {
-    const user: User | null = await this.userService.getUser(data.id);
+    const user: User | null = await this.userService.getUser(data.username);
     const hashedEnteredPass: boolean = await bcrypt.compare(
       data.password,
       user.password,
@@ -32,10 +33,10 @@ export class AuthenticationService {
     };
   }
 
-  async register(data): Promise<User> {
-    const hashedPassword: string = await bcrypt.hash(data.password, 10);
+  async register(signupDto: signupDto): Promise<User> {
+    const hashedPassword: string = await bcrypt.hash(signupDto.password, 10);
     const user: User = await this.userService.createUser({
-      ...data,
+      ...signupDto,
       password: hashedPassword,
     });
     return user;

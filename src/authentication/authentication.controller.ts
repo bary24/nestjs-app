@@ -1,5 +1,6 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { AuthenticationService } from './authentication.service';
+import { signupDto } from './dtos/signup.dto';
 
 @Controller('authentication')
 export class AuthenticationController {
@@ -13,9 +14,7 @@ export class AuthenticationController {
 
   @Post('signup')
   @HttpCode(HttpStatus.CREATED)
-  async register(
-    @Body() data: { username: string; password: string; name: string },
-  ) {
-    return await this.authenticationService.register(data);
+  async register(@Body() signupDto: signupDto) {
+    return await this.authenticationService.register(signupDto);
   }
 }
