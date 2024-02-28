@@ -3,7 +3,7 @@ import { IsArray, IsString } from 'class-validator';
 
 export class CreatInvoiceDTO {
   @IsArray()
-  items: Item[];
+  items: string[];
   @IsString()
   user: string;
   status: string;

@@ -54,7 +54,7 @@ export class InvoiceService {
 
     // Load item entities based on the provided item IDs
     const itemEntities = await Promise.all(
-      items.map((itemId) => this.itemRepository.findOneBy({ id: itemId.id })),
+      items.map((itemId) => this.itemRepository.findOneBy({ id: itemId })),
     );
 
     // Filter out any null values in case some items weren't found
